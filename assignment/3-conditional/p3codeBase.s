@@ -11,7 +11,47 @@
 # c --> $s2
 # d --> $s3
 main:    
+
+
+    li $s0, 5		
+    li $s1, 6		
+    li $s2, 7		
+    li $s3, -1 		
     
+    bgt $s0, 10, else1		
+    addi $s0, $s0, 1
+    j exit1
+    else1: 
+         addi $s0, $s0, -1
+    exit1:
+    
+    add $s3, $s0, $s2
+    add $s2, $s0, $s3
+    
+    bgt $s1, 10, else2
+    addi $s1, $s1, 1
+    addi $s2, $s2, -1
+    j exit2
+    else2: 
+          addi $s1, $s1, -1
+    	  addi $s2, $s2, 1
+    exit2:
+    
+    add $s0, $s2, $s1
+    add $s1, $s2, $s3
+    
+    bge $s1, $s2, elif
+    ble $s1, $s0, elif
+    add $3, $s0, $s1
+    j exit3
+    elif: ble $s1, $s2 in_if
+    	   bge $s2, $s0 exit3
+    	   in_if: add $s3, $s1, $s2
+    exit3:
+    
+
+
+
 
 exit:
     la   $a0, albl      # puts albl into arg0 (a0 register) for cout
